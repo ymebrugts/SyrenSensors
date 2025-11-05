@@ -2,6 +2,9 @@
     "folders": [
         {
             "path": "..\\ChannelSounding\\bt_cs_soc_initiator"
+        },
+        {
+            "path": "..\\ChannelSounding\\bt_cs_soc_reflector"
         }
     ],
     "siWorkspaceRoot": "C:\\Users\\YmeBrugts\\SimplicityStudio\\ChannelSounding"
