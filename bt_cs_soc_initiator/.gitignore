@@ -1,13 +1,7 @@
 # Simplicity Studio / Silicon Labs specific
-*.slsproj
-*.slsproject
-*.slsbak
-*.sls
 build/
 GNU ARM*/
-*.pintool.bak
-*.slpb
-*.slps
+
 
 # Build artifacts
 *.o
@@ -21,9 +15,6 @@ GNU ARM*/
 *.lst
 *.su
 *.axf
-
-# Simplicity Studio project files
-*.pintool
 
 # Build directories
 bin/
