@@ -181,43 +181,43 @@ void app_init(void)
   }
 
   // Log configuration parameters
-  log_info("+-[CS initiator by Silicon Labs]--------------------------+" NL);
-  log_info("+---------------------------------------------------------+" NL);
-  if (initiator_config.procedure_scheduling != CS_PROCEDURE_SCHEDULING_CUSTOM) {
-    log_info(APP_PREFIX "Using %s based procedure scheduling." NL,
-             initiator_config.procedure_scheduling == CS_PROCEDURE_SCHEDULING_OPTIMIZED_FOR_FREQUENCY
-             ? "frequency update" : "energy consumption");
-  } else {
-    log_info(APP_PREFIX "Using custom procedure scheduling." NL);
-  }
-  log_info(APP_PREFIX "%s" NL,
-           (initiator_config.max_procedure_count == 0) ? "Free running." : "Start new procedure after one finished.");
-  log_info(APP_PREFIX "Antenna offset: wire%s" NL,
-           CS_INITIATOR_ANTENNA_OFFSET ? "d" : "less");
-  log_info(APP_PREFIX "Default CS procedure interval: %u" NL, initiator_config.min_procedure_interval);
-  log_info(APP_PREFIX "CS main mode: %s (%u)" NL,
-           (initiator_config.cs_main_mode == sl_bt_cs_mode_pbr) ? "PBR" : "RTT",
-           initiator_config.cs_main_mode);
-  log_info(APP_PREFIX "CS sub mode: %s (%u)" NL,
-           (initiator_config.cs_sub_mode == sl_bt_cs_submode_disabled) ? "Disabled" : "RTT",
-           initiator_config.cs_sub_mode);
-  log_info(APP_PREFIX "Requested antenna usage: %s" NL, antenna_usage_to_str(&initiator_config));
-  log_info(APP_PREFIX "Object tracking mode: %s" NL, algo_mode_to_str(rtl_config.algo_mode));
-  log_info(APP_PREFIX "CS channel map preset: %d" NL, initiator_config.channel_map_preset);
-  log_info(APP_PREFIX "CS channel map: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X" NL,
-           initiator_config.channel_map.data[0],
-           initiator_config.channel_map.data[1],
-           initiator_config.channel_map.data[2],
-           initiator_config.channel_map.data[3],
-           initiator_config.channel_map.data[4],
-           initiator_config.channel_map.data[5],
-           initiator_config.channel_map.data[6],
-           initiator_config.channel_map.data[7],
-           initiator_config.channel_map.data[8],
-           initiator_config.channel_map.data[9]);
-  log_info(APP_PREFIX "RSSI reference TX power @ 1m: %d dBm" NL,
-           (int)initiator_config.rssi_ref_tx_power);
-  log_info("+-------------------------------------------------------+" NL);
+  // log_info("+-[CS initiator by Silicon Labs]--------------------------+" NL);
+  // log_info("+---------------------------------------------------------+" NL);
+  // if (initiator_config.procedure_scheduling != CS_PROCEDURE_SCHEDULING_CUSTOM) {
+  //   log_info(APP_PREFIX "Using %s based procedure scheduling." NL,
+  //            initiator_config.procedure_scheduling == CS_PROCEDURE_SCHEDULING_OPTIMIZED_FOR_FREQUENCY
+  //            ? "frequency update" : "energy consumption");
+  // } else {
+  //   log_info(APP_PREFIX "Using custom procedure scheduling." NL);
+  // }
+  // log_info(APP_PREFIX "%s" NL,
+  //          (initiator_config.max_procedure_count == 0) ? "Free running." : "Start new procedure after one finished.");
+  // log_info(APP_PREFIX "Antenna offset: wire%s" NL,
+  //          CS_INITIATOR_ANTENNA_OFFSET ? "d" : "less");
+  // log_info(APP_PREFIX "Default CS procedure interval: %u" NL, initiator_config.min_procedure_interval);
+  // log_info(APP_PREFIX "CS main mode: %s (%u)" NL,
+  //          (initiator_config.cs_main_mode == sl_bt_cs_mode_pbr) ? "PBR" : "RTT",
+  //          initiator_config.cs_main_mode);
+  // log_info(APP_PREFIX "CS sub mode: %s (%u)" NL,
+  //          (initiator_config.cs_sub_mode == sl_bt_cs_submode_disabled) ? "Disabled" : "RTT",
+  //          initiator_config.cs_sub_mode);
+  // log_info(APP_PREFIX "Requested antenna usage: %s" NL, antenna_usage_to_str(&initiator_config));
+  // log_info(APP_PREFIX "Object tracking mode: %s" NL, algo_mode_to_str(rtl_config.algo_mode));
+  // log_info(APP_PREFIX "CS channel map preset: %d" NL, initiator_config.channel_map_preset);
+  // log_info(APP_PREFIX "CS channel map: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X" NL,
+  //          initiator_config.channel_map.data[0],
+  //          initiator_config.channel_map.data[1],
+  //          initiator_config.channel_map.data[2],
+  //          initiator_config.channel_map.data[3],
+  //          initiator_config.channel_map.data[4],
+  //          initiator_config.channel_map.data[5],
+  //          initiator_config.channel_map.data[6],
+  //          initiator_config.channel_map.data[7],
+  //          initiator_config.channel_map.data[8],
+  //          initiator_config.channel_map.data[9]);
+  // log_info(APP_PREFIX "RSSI reference TX power @ 1m: %d dBm" NL,
+  //          (int)initiator_config.rssi_ref_tx_power);
+  // log_info("+-------------------------------------------------------+" NL);
 
   sc = cs_initiator_display_init();
   app_assert_status_f(sc, "cs_initiator_display_init failed");
@@ -239,73 +239,85 @@ void app_process_action(void)
     if (cs_initiator_instances[i].measurement_arrived) {
       // write results to the display & to the iostream
       cs_initiator_instances[i].measurement_arrived = false;
-      log_info(APP_INSTANCE_PREFIX "# %04lu --- Ranging Counter = %04lu" NL,
-               cs_initiator_instances[i].conn_handle,
-               cs_initiator_instances[i].measurement_cnt,
-               cs_initiator_instances[i].ranging_counter);
+      // log_info(APP_INSTANCE_PREFIX "# %04lu --- Ranging Counter = %04lu" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          cs_initiator_instances[i].measurement_cnt,
+      //          cs_initiator_instances[i].ranging_counter);
 
+      // const bd_addr *bt_address2 = ble_peer_manager_get_bt_address(cs_initiator_instances[i].conn_handle);
+      // log_info(APP_INSTANCE_PREFIX "BT Address: %02X:%02X:%02X:%02X:%02X:%02X" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          bt_address2->addr[5],
+      //          bt_address2->addr[4],
+      //          bt_address2->addr[3],
+      //          bt_address2->addr[2],
+      //          bt_address2->addr[1],
+      //          bt_address2->addr[0]);
+
+      // log_info(APP_INSTANCE_PREFIX "Measurement main mode result: %lu mm" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_filtered * 1000.f));
+      // if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
+      //   log_info(APP_INSTANCE_PREFIX "Measurement sub mode result: %lu mm" NL,
+      //            cs_initiator_instances[i].conn_handle,
+      //            (uint32_t)(cs_initiator_instances[i].measurement_submode.distance_filtered * 1000.f));
+      // }
+      
       const bd_addr *bt_address = ble_peer_manager_get_bt_address(cs_initiator_instances[i].conn_handle);
-      log_info(APP_INSTANCE_PREFIX "BT Address: %02X:%02X:%02X:%02X:%02X:%02X" NL,
-               cs_initiator_instances[i].conn_handle,
+      log_info("{\"id\": \"%02X:%02X:%02X:%02X:%02X:%02X\", \"distance\": %lu}\r\n",
                bt_address->addr[5],
                bt_address->addr[4],
                bt_address->addr[3],
                bt_address->addr[2],
                bt_address->addr[1],
-               bt_address->addr[0]);
+               bt_address->addr[0],
+              (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_filtered * 1000.f));
 
-      log_info(APP_INSTANCE_PREFIX "Measurement main mode result: %lu mm" NL,
-               cs_initiator_instances[i].conn_handle,
-               (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_filtered * 1000.f));
-      if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
-        log_info(APP_INSTANCE_PREFIX "Measurement sub mode result: %lu mm" NL,
-                 cs_initiator_instances[i].conn_handle,
-                 (uint32_t)(cs_initiator_instances[i].measurement_submode.distance_filtered * 1000.f));
-      }
+              
 
-      log_info(APP_INSTANCE_PREFIX "Raw main mode distance: %lu mm" NL,
-               cs_initiator_instances[i].conn_handle,
-               (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_raw * 1000.f));
+      // log_info(APP_INSTANCE_PREFIX "Raw main mode distance: %lu mm" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_raw * 1000.f));
 
-      if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
-        log_info(APP_INSTANCE_PREFIX "Raw sub mode distance: %lu mm" NL,
-                 cs_initiator_instances[i].conn_handle,
-                 (uint32_t)(cs_initiator_instances[i].measurement_submode.distance_raw * 1000.f));
-      }
+      // if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
+      //   log_info(APP_INSTANCE_PREFIX "Raw sub mode distance: %lu mm" NL,
+      //            cs_initiator_instances[i].conn_handle,
+      //            (uint32_t)(cs_initiator_instances[i].measurement_submode.distance_raw * 1000.f));
+      // }
 
-      log_info(APP_INSTANCE_PREFIX "Measurement main mode likeliness: %01u.%02u" NL,
-               cs_initiator_instances[i].conn_handle,
-               ((uint8_t)cs_initiator_instances[i].measurement_mainmode.likeliness),
-               (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_mainmode.likeliness * 100.f)) % 100);
+      // log_info(APP_INSTANCE_PREFIX "Measurement main mode likeliness: %01u.%02u" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          ((uint8_t)cs_initiator_instances[i].measurement_mainmode.likeliness),
+      //          (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_mainmode.likeliness * 100.f)) % 100);
 
-      if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
-        log_info(APP_INSTANCE_PREFIX "Measurement sub mode likeliness: %01u.%02u" NL,
-                 cs_initiator_instances[i].conn_handle,
-                 ((uint8_t)cs_initiator_instances[i].measurement_submode.likeliness),
-                 (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_submode.likeliness * 100.f)) % 100);
-      }
+      // if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
+      //   log_info(APP_INSTANCE_PREFIX "Measurement sub mode likeliness: %01u.%02u" NL,
+      //            cs_initiator_instances[i].conn_handle,
+      //            ((uint8_t)cs_initiator_instances[i].measurement_submode.likeliness),
+      //            (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_submode.likeliness * 100.f)) % 100);
+      // }
 
-      log_info(APP_INSTANCE_PREFIX "RSSI distance: %lu mm" NL,
-               cs_initiator_instances[i].conn_handle,
-               (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_estimate_rssi * 1000.f));
+      // log_info(APP_INSTANCE_PREFIX "RSSI distance: %lu mm" NL,
+      //          cs_initiator_instances[i].conn_handle,
+      //          (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_estimate_rssi * 1000.f));
 
-      if (rtl_config.algo_mode == SL_RTL_CS_ALGO_MODE_REAL_TIME_FAST
-          && initiator_config.cs_main_mode == sl_bt_cs_mode_pbr
-          && (initiator_config.channel_map_preset == CS_CHANNEL_MAP_PRESET_HIGH
-              || initiator_config.channel_map_preset == CS_CHANNEL_MAP_PRESET_MEDIUM)) {
-        log_info(APP_INSTANCE_PREFIX "Velocity: %s%lu.%02u" NL,
-                 cs_initiator_instances[i].conn_handle,
-                 (cs_initiator_instances[i].measurement_mainmode.velocity >= 0) ? " " : "-",
-                 ((uint32_t)ABS(cs_initiator_instances[i].measurement_mainmode.velocity)),
-                 (uint16_t)((uint32_t)(ABS(cs_initiator_instances[i].measurement_mainmode.velocity) * 100.f + 0.5f)) % 100);
-      }
-      if ((initiator_config.cs_main_mode == sl_bt_cs_mode_rtt)
-          && !isnan(cs_initiator_instances[i].measurement_mainmode.bit_error_rate)) {
-        log_info(APP_INSTANCE_PREFIX "CS bit error rate: %1u.%02u" NL,
-                 cs_initiator_instances[i].conn_handle,
-                 ((uint8_t)cs_initiator_instances[i].measurement_mainmode.bit_error_rate),
-                 (uint16_t)((uint32_t)(ABS(cs_initiator_instances[i].measurement_mainmode.bit_error_rate) * 100.f)) % 100);
-      }
+      // if (rtl_config.algo_mode == SL_RTL_CS_ALGO_MODE_REAL_TIME_FAST
+      //     && initiator_config.cs_main_mode == sl_bt_cs_mode_pbr
+      //     && (initiator_config.channel_map_preset == CS_CHANNEL_MAP_PRESET_HIGH
+      //         || initiator_config.channel_map_preset == CS_CHANNEL_MAP_PRESET_MEDIUM)) {
+      //   log_info(APP_INSTANCE_PREFIX "Velocity: %s%lu.%02u" NL,
+      //            cs_initiator_instances[i].conn_handle,
+      //            (cs_initiator_instances[i].measurement_mainmode.velocity >= 0) ? " " : "-",
+      //            ((uint32_t)ABS(cs_initiator_instances[i].measurement_mainmode.velocity)),
+      //            (uint16_t)((uint32_t)(ABS(cs_initiator_instances[i].measurement_mainmode.velocity) * 100.f + 0.5f)) % 100);
+      // }
+      // if ((initiator_config.cs_main_mode == sl_bt_cs_mode_rtt)
+      //     && !isnan(cs_initiator_instances[i].measurement_mainmode.bit_error_rate)) {
+      //   log_info(APP_INSTANCE_PREFIX "CS bit error rate: %1u.%02u" NL,
+      //            cs_initiator_instances[i].conn_handle,
+      //            ((uint8_t)cs_initiator_instances[i].measurement_mainmode.bit_error_rate),
+      //            (uint16_t)((uint32_t)(ABS(cs_initiator_instances[i].measurement_mainmode.bit_error_rate) * 100.f)) % 100);
+      // }
       cs_initiator_display_update_data(i,
                                        cs_initiator_instances[i].conn_handle,
                                        CS_INITIATOR_DISPLAY_STATUS_CONNECTED,
@@ -321,14 +333,14 @@ void app_process_action(void)
       // write measurement progress to the display without changing the last valid
       // measurement results
       cs_initiator_instances[i].measurement_progress_changed = false;
-      log_info(APP_INSTANCE_PREFIX "# %04lu ---" NL,
-               cs_initiator_instances[i].measurement_progress.connection,
-               cs_initiator_instances[i].measurement_cnt);
+      // log_info(APP_INSTANCE_PREFIX "# %04lu ---" NL,
+      //          cs_initiator_instances[i].measurement_progress.connection,
+      //          cs_initiator_instances[i].measurement_cnt);
 
-      log_info(APP_INSTANCE_PREFIX "Estimation in progress: %3u.%02u %%" NL,
-               cs_initiator_instances[i].measurement_progress.connection,
-               ((uint8_t)cs_initiator_instances[i].measurement_progress.progress_percentage),
-               (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_progress.progress_percentage * 100.f)) % 100);
+      // log_info(APP_INSTANCE_PREFIX "Estimation in progress: %3u.%02u %%" NL,
+      //          cs_initiator_instances[i].measurement_progress.connection,
+      //          ((uint8_t)cs_initiator_instances[i].measurement_progress.progress_percentage),
+      //          (uint16_t)((uint32_t)(cs_initiator_instances[i].measurement_progress.progress_percentage * 100.f)) % 100);
 
       cs_initiator_display_update_data(i,
                                        cs_initiator_instances[i].conn_handle,
