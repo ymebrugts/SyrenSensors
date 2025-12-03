@@ -203,7 +203,7 @@
 // <CS_PROCEDURE_SCHEDULING_CUSTOM=> Use custom procedure scheduling
 // <i> Set your custom connection and procedure intervals in the 'Custom Scheduling' section when selecting 'Use custom procedure scheduling' (CS_PROCEDURE_SCHEDULING_CUSTOM).
 // <i> Default: CS_PROCEDURE_SCHEDULING_OPTIMIZED_FOR_FREQUENCY
-#define CS_INITIATOR_DEFAULT_PROCEDURE_SCHEDULING CS_PROCEDURE_SCHEDULING_OPTIMIZED_FOR_FREQUENCY
+#define CS_INITIATOR_DEFAULT_PROCEDURE_SCHEDULING CS_PROCEDURE_SCHEDULING_CUSTOM
 
 // </h>
 
@@ -211,24 +211,24 @@
 
 // <o CS_INITIATOR_DEFAULT_MIN_CONNECTION_INTERVAL> Minimum connection interval (in 1.25 ms steps) <6..3200>
 // <i> Default: 6
-#define CS_INITIATOR_DEFAULT_MIN_CONNECTION_INTERVAL         6
+#define CS_INITIATOR_DEFAULT_MIN_CONNECTION_INTERVAL         15
 
 // <o CS_INITIATOR_DEFAULT_MAX_CONNECTION_INTERVAL> Maximum connection interval (in 1.25 ms steps) <6..3200>
 // <i> Default: 6
-#define CS_INITIATOR_DEFAULT_MAX_CONNECTION_INTERVAL         6
+#define CS_INITIATOR_DEFAULT_MAX_CONNECTION_INTERVAL         15
 
 // <o CS_INITIATOR_DEFAULT_MIN_PROCEDURE_INTERVAL> Minimum delay between CS measurements [connection events] <1..255>
 // <i> Default: 38
 // <i> Minimum duration in number of connection events between consecutive CS measurement procedures
 #ifndef CS_INITIATOR_DEFAULT_MIN_PROCEDURE_INTERVAL
-#define CS_INITIATOR_DEFAULT_MIN_PROCEDURE_INTERVAL                     (38)
+#define CS_INITIATOR_DEFAULT_MIN_PROCEDURE_INTERVAL                     (80)
 #endif
 
 // <o CS_INITIATOR_DEFAULT_MAX_PROCEDURE_INTERVAL> Maximum delay between CS measurements [connection events] <1..255>
 // <i> Default: 38
 // <i> Maximum duration in number of connection events between consecutive CS measurement procedures
 #ifndef CS_INITIATOR_DEFAULT_MAX_PROCEDURE_INTERVAL
-#define CS_INITIATOR_DEFAULT_MAX_PROCEDURE_INTERVAL                     (38)
+#define CS_INITIATOR_DEFAULT_MAX_PROCEDURE_INTERVAL                     (80)
 #endif
 
 // </h>
