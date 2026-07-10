@@ -490,6 +490,7 @@ static void cs_on_result(const uint8_t conn_handle,
       log_error(APP_INSTANCE_PREFIX "Failed to extract distance! [sc: 0x%lx]" NL,
                 conn_handle,
                 sc);
+      return;
     }
 
     if (initiator_config.cs_sub_mode != sl_bt_cs_submode_disabled) {
