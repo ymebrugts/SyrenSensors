@@ -286,9 +286,9 @@ static void on_connection_closed(uint8_t conn_handle)
   sl_status_t sc;
   bool advertisement_should_be_restarted = false;
   uint8_t reflector_count = cs_reflector_get_active_instance_count();
-  // If we are at the maximum capacity - it means that the advertisement is not running
-  // Restart advertising for new initiator connections if we were at the limit
-  if (reflector_count <= SL_BT_CONFIG_MAX_CONNECTIONS) {
+  // Advertising is stopped while the reflector is at capacity.
+  // The count is sampled before the closed connection is removed.
+  if (reflector_count == SL_BT_CONFIG_MAX_CONNECTIONS) {
     advertisement_should_be_restarted = true;
   }
 

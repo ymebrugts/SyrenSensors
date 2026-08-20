@@ -262,8 +262,22 @@ void app_process_action(void)
       //            cs_initiator_instances[i].conn_handle,
       //            (uint32_t)(cs_initiator_instances[i].measurement_submode.distance_filtered * 1000.f));
       // }
-      
       const bd_addr *bt_address = ble_peer_manager_get_bt_address(cs_initiator_instances[i].conn_handle);
+      if (bt_address == NULL) {
+        log_error(APP_INSTANCE_PREFIX "Peer address is unavailable." NL,
+                  cs_initiator_instances[i].conn_handle);
+        continue;
+      }
+
+      float distance_m = cs_initiator_instances[i].measurement_mainmode.distance_filtered;
+      if (!isfinite(distance_m)
+          || distance_m < 0.0f
+          || distance_m >= ((float)UINT32_MAX / 1000.0f)) {
+        log_error(APP_INSTANCE_PREFIX "Filtered distance is invalid." NL,
+                  cs_initiator_instances[i].conn_handle);
+        continue;
+      }
+
       log_info("{\"id\": \"%02X:%02X:%02X:%02X:%02X:%02X\", \"distance\": %lu}\r\n",
                bt_address->addr[5],
                bt_address->addr[4],
@@ -271,9 +285,7 @@ void app_process_action(void)
                bt_address->addr[2],
                bt_address->addr[1],
                bt_address->addr[0],
-              (uint32_t)(cs_initiator_instances[i].measurement_mainmode.distance_filtered * 1000.f));
-
-              
+               (uint32_t)(distance_m * 1000.0f));
 
       // log_info(APP_INSTANCE_PREFIX "Raw main mode distance: %lu mm" NL,
       //          cs_initiator_instances[i].conn_handle,

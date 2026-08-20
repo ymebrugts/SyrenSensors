@@ -91,6 +91,13 @@ void sl_ncp_user_cmd_message_to_target_cb(void *data)
 
       // Example: Respond, then send events with the given interval until the
       // USER_CMD_PERIODIC_ASYNC_STOP_ID command is received.
+      if (user_cmd->data.periodic_event_test.length == 0) {
+        sl_ncp_user_cmd_message_to_target_rsp(SL_STATUS_INVALID_PARAMETER,
+                                              1,
+                                              &user_cmd->hdr);
+        break;
+      }
+
       test_length = user_cmd->data.periodic_event_test.length;
       test_interval = user_cmd->data.periodic_event_test.interval;
       test_count = 0;
@@ -181,10 +188,14 @@ static void test_timer_callback(app_timer_t *timer, void *data)
 {
   (void)timer;
   (void)data;
-  if (test_data != NULL) {
+  if (test_data != NULL && test_length > 0) {
     // Generate test data with the given length using the counter.
     test_data[0] = USER_CMD_PERIODIC_ASYNC_ID;
-    memset((void *)&test_data[1], (uint8_t)(test_count & 0xff), test_length);
+    if (test_length > 1) {
+      memset((void *)&test_data[1],
+             (uint8_t)(test_count & 0xff),
+             test_length - 1);
+    }
 
     // Send event to NCP host.
     sl_ncp_user_evt_message_to_host(test_length, test_data);
